@@ -19,6 +19,13 @@ python3 -m http.server 4173
 
 `http://localhost:4173`
 
+## حل مشكلة ظهور الصفحة بدون CSS
+- تأكد أنك تفتح عبر السيرفر (`http://localhost:4173`) وليس فتح ملف `index.html` مباشرة.
+- أضف تحديث قوي للمتصفح (Hard Refresh):
+  - Windows/Linux: `Ctrl + Shift + R`
+  - macOS: `Cmd + Shift + R`
+- تم إضافة cache-busting للملفات (`style.css?v=4` و `app.js?v=4`) لتجنب تحميل نسخة قديمة من الكاش.
+
 ## تنبيه
 بوابة الدفع هنا **تجريبية محلية** لتجربة تدفق الدفع داخل الموقع.
 لو تريد دفع حقيقي (Visa/Mastercard فعلي) نحتاج Backend وربط Stripe/Paymob/HyperPay ومفاتيح API.
