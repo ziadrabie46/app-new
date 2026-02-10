@@ -1,0 +1,135 @@
+:root {
+  --bg: #f4f7ff;
+  --card: #ffffff;
+  --primary: #4a5ef7;
+  --primary-dark: #3647d8;
+  --success: #1d9a56;
+  --danger: #c43636;
+  --text: #1f2440;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Cairo", "Segoe UI", Tahoma, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.container {
+  width: min(920px, 92%);
+  margin: 2rem auto;
+  display: grid;
+  gap: 1rem;
+}
+
+header {
+  text-align: center;
+}
+
+.card {
+  background: var(--card);
+  border-radius: 14px;
+  padding: 1rem;
+  box-shadow: 0 8px 25px rgba(27, 43, 122, 0.08);
+}
+
+.points-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.points {
+  font-size: 2.2rem;
+  margin: 0;
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.task-form {
+  display: grid;
+  gap: 0.8rem;
+}
+
+label {
+  display: grid;
+  gap: 0.35rem;
+  font-weight: 600;
+}
+
+input,
+button {
+  border-radius: 10px;
+  border: 1px solid #d7dcf5;
+  padding: 0.7rem 0.8rem;
+  font-size: 1rem;
+}
+
+button {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--primary-dark);
+}
+
+.tasks-list {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.tasks-list.empty {
+  color: #6d7194;
+}
+
+.task-item {
+  border: 1px solid #e5e8f9;
+  border-radius: 10px;
+  padding: 0.8rem;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.task-item .title {
+  margin: 0;
+}
+
+.task-item .time {
+  margin: 0;
+  color: #565e8f;
+}
+
+.verify-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.status {
+  margin: 0;
+  font-weight: 700;
+}
+
+.status.waiting {
+  color: #8f7780;
+}
+
+.status.accepted {
+  color: var(--success);
+}
+
+.status.rejected {
+  color: var(--danger);
+}
+
+.shop-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
