@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TaskUp | منصة التزام المهام</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="logo">⚡</span>
+        <div>
+          <h1>TaskUp</h1>
+          <small>منصة متابعة الالتزام اليومي</small>
+        </div>
+      </div>
+      <nav class="main-nav">
+        <button class="nav-link active" data-tab="dashboard">الرئيسية</button>
+        <button class="nav-link" data-tab="tasks">المهام</button>
+        <button class="nav-link" data-tab="history">الإنجازات</button>
+        <button class="nav-link" data-tab="shop">المتجر والدفع</button>
+        <button class="nav-link" data-tab="profile">الحساب</button>
+      </nav>
+    </header>
+
+    <main class="layout">
+      <section id="dashboard" class="tab active">
+        <div class="hero card">
+          <h2>التزم بخطتك.. وارفع إثباتك بالصور</h2>
+          <p>
+            سجّل المهمات بوقت محدد، وارفع صورة بعد التنفيذ، وسيتم تقييمها تلقائيًا.
+            لو لم تنفّذ المطلوب يتم خصم نقاط منك.
+          </p>
+          <div class="cta-row">
+            <button class="jump" data-jump="tasks">ابدأ بإضافة مهمة</button>
+            <button class="jump secondary" data-jump="shop">اشحن نقاط الآن</button>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <article class="card stat">
+            <p>رصيد النقاط</p>
+            <h3 id="pointsValue">100</h3>
+          </article>
+          <article class="card stat">
+            <p>المهام المنجزة</p>
+            <h3 id="doneCount">0</h3>
+          </article>
+          <article class="card stat">
+            <p>المهام المرفوضة</p>
+            <h3 id="rejectedCount">0</h3>
+          </article>
+          <article class="card stat">
+            <p>معدل الالتزام</p>
+            <h3 id="scoreRate">0%</h3>
+          </article>
+        </div>
+      </section>
+
+      <section id="tasks" class="tab">
+        <div class="card">
+          <h2>إضافة مهمة جديدة</h2>
+          <form id="taskForm" class="task-form">
+            <label>
+              اسم المهمة
+              <input type="text" id="taskTitle" placeholder="مثال: جيم 30 دقيقة" required />
+            </label>
+            <label>
+              وصف تفصيلي
+              <textarea id="taskDescription" rows="3" placeholder="اكتب المطلوب بالتفصيل"></textarea>
+            </label>
+            <label>
+              وقت التنفيذ
+              <input type="datetime-local" id="taskTime" required />
+            </label>
+            <button type="submit">حفظ المهمة</button>
+          </form>
+        </div>
+
+        <div class="card">
+          <div class="section-title">
+            <h2>قائمة المهام</h2>
+            <small>قبول المهمة +12 نقطة | رفضها -20 نقطة | تأخير بدون إثبات -10</small>
+          </div>
+          <div id="tasksList" class="tasks-list empty">لا توجد مهام حالياً.</div>
+        </div>
+      </section>
+
+      <section id="history" class="tab">
+        <div class="card">
+          <h2>سجل العمليات</h2>
+          <div id="transactionsList" class="transactions empty">لا يوجد سجل حتى الآن.</div>
+        </div>
+      </section>
+
+      <section id="shop" class="tab">
+        <div class="card">
+          <h2>متجر النقاط</h2>
+          <p>اختر الباقة ثم أكمل الدفع داخل المنصة.</p>
+          <div class="packages" id="packages">
+            <button class="package" data-points="80" data-price="3.99">+80 نقطة<span>3.99$</span></button>
+            <button class="package" data-points="200" data-price="7.99">+200 نقطة<span>7.99$</span></button>
+            <button class="package" data-points="500" data-price="14.99">+500 نقطة<span>14.99$</span></button>
+          </div>
+        </div>
+
+        <div class="card checkout" id="checkoutCard">
+          <h3>الدفع الآمن</h3>
+          <p id="selectedPackage">اختر باقة أولًا.</p>
+          <form id="checkoutForm" class="checkout-form">
+            <label>
+              الاسم على البطاقة
+              <input type="text" id="cardName" placeholder="Ahmed Ali" required />
+            </label>
+            <label>
+              رقم البطاقة
+              <input type="text" id="cardNumber" maxlength="19" placeholder="4242 4242 4242 4242" required />
+            </label>
+            <div class="row">
+              <label>
+                تاريخ الانتهاء
+                <input type="text" id="cardExpiry" maxlength="5" placeholder="MM/YY" required />
+              </label>
+              <label>
+                CVV
+                <input type="password" id="cardCvv" maxlength="4" placeholder="123" required />
+              </label>
+            </div>
+            <button type="submit" id="payBtn" disabled>ادفع الآن</button>
+          </form>
+          <small>بيئة دفع تجريبية داخل الموقع (Sandbox).</small>
+        </div>
+      </section>
+
+      <section id="profile" class="tab">
+        <div class="card profile-card">
+          <h2>الحساب</h2>
+          <label>
+            اسم المستخدم
+            <input id="usernameInput" type="text" placeholder="اكتب اسمك" />
+          </label>
+          <button id="saveProfileBtn">حفظ البيانات</button>
+          <p id="profileHint">قم بتخصيص حسابك ليظهر في سجل العمليات.</p>
+        </div>
+      </section>
+    </main>
+
+    <template id="taskTemplate">
+      <article class="task-item">
+        <div>
+          <h3 class="title"></h3>
+          <p class="description"></p>
+          <p class="time"></p>
+        </div>
+        <label class="upload-label">
+          صورة الإثبات
+          <input type="file" class="proof" accept="image/*" />
+        </label>
+        <div class="task-actions">
+          <button class="verify-btn" type="button">مراجعة AI</button>
+          <button class="delete-btn" type="button">حذف</button>
+        </div>
+        <p class="status waiting">في انتظار صورة ومراجعة.</p>
+      </article>
+    </template>
+
+    <template id="transactionTemplate">
+      <article class="tx-item">
+        <p class="tx-title"></p>
+        <small class="tx-time"></small>
+      </article>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
