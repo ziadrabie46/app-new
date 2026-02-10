@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>تطبيق التحدي بالمهام</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1>تطبيق تحدي الالتزام</h1>
+        <p>سجّل المهمة والوقت، واثبت تنفيذها بصورة.</p>
+      </header>
+
+      <section class="card points-card">
+        <h2>نقاطك</h2>
+        <p class="points" id="pointsValue">100</p>
+        <small>+10 عند قبول المهمة / -15 عند الرفض</small>
+      </section>
+
+      <section class="card">
+        <h2>إضافة مهمة جديدة</h2>
+        <form id="taskForm" class="task-form">
+          <label>
+            وصف المهمة
+            <input type="text" id="taskTitle" placeholder="مثال: تمرين 20 دقيقة" required />
+          </label>
+          <label>
+            وقت التنفيذ
+            <input type="datetime-local" id="taskTime" required />
+          </label>
+          <button type="submit">إضافة المهمة</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>المهام الحالية</h2>
+        <div id="tasksList" class="tasks-list empty">لا توجد مهام حالياً.</div>
+      </section>
+
+      <section class="card shop">
+        <h2>شراء نقاط</h2>
+        <p>لو نقاطك قليلة، تقدر تشتري باقات وهمية للتجربة:</p>
+        <div class="shop-buttons">
+          <button data-points="50" data-price="2.99">+50 نقطة (2.99$)</button>
+          <button data-points="120" data-price="5.99">+120 نقطة (5.99$)</button>
+          <button data-points="300" data-price="11.99">+300 نقطة (11.99$)</button>
+        </div>
+      </section>
+    </main>
+
+    <template id="taskTemplate">
+      <article class="task-item">
+        <h3 class="title"></h3>
+        <p class="time"></p>
+        <label class="upload-label">
+          صورة الإثبات
+          <input type="file" class="proof" accept="image/*" />
+        </label>
+        <button class="verify-btn" type="button">مراجعة بالذكاء الاصطناعي</button>
+        <p class="status waiting">في انتظار صورة ومراجعة</p>
+      </article>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
