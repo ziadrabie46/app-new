@@ -293,3 +293,18 @@ textarea {
     grid-template-columns: 1fr;
   }
 }
+
+.server-badge {
+  padding: 0.4rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.server-badge.online {
+  background: #e8f8ef;
+  color: #157347;
+}
+.server-badge.offline {
+  background: #ffe9ec;
+  color: #9f1239;
+}

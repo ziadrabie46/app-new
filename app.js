@@ -20,12 +20,15 @@ const els = {
   usernameInput: document.getElementById("usernameInput"),
   saveProfileBtn: document.getElementById("saveProfileBtn"),
   profileHint: document.getElementById("profileHint"),
+  serverBadge: document.getElementById("serverBadge"),
 };
 
 const state = loadState();
 checkExpiredTasks();
 bindUi();
 renderAll();
+bootstrapFromServer();
+setServerBadge(false);
 
 function loadState() {
   const fallback = {
@@ -48,6 +51,7 @@ function loadState() {
 
 function saveState() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  saveStateToServer();
 }
 
 function bindUi() {
@@ -342,4 +346,42 @@ function formatCardNumber(event) {
 function formatExpiry(event) {
   const value = event.target.value.replace(/\D/g, "").slice(0, 4);
   event.target.value = value.length > 2 ? `${value.slice(0, 2)}/${value.slice(2)}` : value;
+}
+
+
+async function bootstrapFromServer() {
+  try {
+    const res = await fetch("/api/state");
+    if (!res.ok) throw new Error("bad");
+    const remote = await res.json();
+    Object.assign(state, remote);
+    setServerBadge(true);
+    renderAll();
+  } catch {
+    setServerBadge(false);
+  }
+}
+
+let saveTimer = null;
+function saveStateToServer() {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(async () => {
+    try {
+      await fetch("/api/state", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(state),
+      });
+      setServerBadge(true);
+    } catch {
+      setServerBadge(false);
+    }
+  }, 120);
+}
+
+function setServerBadge(isOnline) {
+  if (!els.serverBadge) return;
+  els.serverBadge.classList.toggle("online", isOnline);
+  els.serverBadge.classList.toggle("offline", !isOnline);
+  els.serverBadge.textContent = isOnline ? "🟢 Server Connected" : "🔴 Offline (local mode)";
 }
